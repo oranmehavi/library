@@ -1,0 +1,39 @@
+body,
+html {
+    height: 100%;
+    padding: 0px;
+    margin: 0%;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0px;
+}
+
+header {
+    padding: 2rem;
+    background-color: red;
+    display: flex;
+    justify-content: space-between;
+}
+
+header > button {
+    width: 10em;
+    border-radius: 10px;
+    color: white;
+    background-color: #67e8f9;    
+}
+
+.books-container {
+    display: grid;
+}
+
+#bookForm {
+    display: grid;
+    gap: .5em;
+}
