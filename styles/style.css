@@ -30,10 +30,23 @@ header > button {
 }
 
 .books-container {
+    padding: 5em;
     display: grid;
+    column-gap: 3em;
+    row-gap: 2em;
+    grid-template-columns: repeat(auto-fill, 300px)
 }
 
 #bookForm {
     display: grid;
     gap: .5em;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    align-items: center;
+    gap: 1.5em;
+    font-size: 0.75rem;
 }
