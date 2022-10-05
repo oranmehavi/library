@@ -17,7 +17,7 @@ function Book(author, bookName, pages, isRead) {
 }
 
 Book.prototype.setRead = function (status) {
-
+    this.isRead = status;
 };
 
 function addBookToLibrary(author, bookName, pages, isRead) {
@@ -42,24 +42,21 @@ confirmButton.addEventListener('click', () => {
 function showBooks() {
     if (myLibrary.length > 0) {
         bookContainer.innerHTML = '';
-        for(b of myLibrary) {
+        for(let i = 0; i < myLibrary.length; i++) {
+            let b = myLibrary[i];
             let bookCard = document.createElement('div');
             let title = document.createElement('h1');
             let bookAuthor = document.createElement('h2');
             let bookPages = document.createElement('h3');
             let readStatus = document.createElement('h3');
-            let readToggle = document.createElement('input');
+            let readToggle = createToggle(b.isRead);
 
 
             title.innerText = "Book name: " + b.bookName;
             bookAuthor.innerText = "Written by: " + b.author;
             bookPages.innerText = `${b.pages} pages`;
-            if (b.isRead) {
-                readStatus.innerText = "The book is read";
-            }
-            else { 
-                readStatus.innerText = "The book is not read";
-            }
+            readStatus.innerText = setReadStatus(b.isRead);
+            readStatus.setAttribute('id', 'status');
             readToggle.setAttribute('type', 'checkbox');
             readToggle.checked = b.isRead;
             bookCard.appendChild(title);
@@ -67,9 +64,45 @@ function showBooks() {
             bookCard.appendChild(bookPages);
             bookCard.appendChild(readStatus);
             bookCard.appendChild(readToggle);
+            bookCard.setAttribute('data-index', `${i}`);
             bookCard.classList.add('book-card');
             bookContainer.appendChild(bookCard);
         }
         
     }
 }
+function setReadStatus(isRead) {
+    
+    if (isRead) {
+        return "The book is read";
+    }
+
+    return "The book is not read";
+}
+
+function createToggle(isChecked) {
+    let label = document.createElement('label');
+    let toggle = document.createElement('input');
+    let fill = document.createElement('div');
+    label.setAttribute('for', 'myToggle');
+    toggle.setAttribute('type', 'checkbox');
+    toggle.setAttribute('id', 'myToggle');
+    toggle.checked = isChecked;
+    label.classList.add('toggle');
+    toggle.classList.add('toggle-input');
+    toggle.addEventListener('change', (e) => {
+        let card = e.target.parentElement.parentElement;
+        let index = card.dataset.index;
+        myLibrary[index].setRead(e.target.checked);
+        let readStatus = card.querySelector('#status');
+        readStatus.innerText = setReadStatus(myLibrary[index].isRead);
+    });
+
+    fill.classList.add('toggle-fill');
+    label.appendChild(toggle);
+    label.appendChild(fill);
+
+    return label;
+}
+
+
