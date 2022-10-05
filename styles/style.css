@@ -50,3 +50,48 @@ header > button {
     gap: 1.5em;
     font-size: 0.75rem;
 }
+
+.toggle {
+    --width: 40px;
+    --height: calc(var(--width) / 2);
+    --border-radius: calc(var(--height) / 2);
+  
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .toggle-input {
+    display: none;
+  }
+  
+  
+  .toggle-fill {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    background: #dddddd;
+    transition: background .2s;
+  }
+  
+  .toggle-input:checked ~ .toggle-fill {
+    background: blue;
+  }
+  
+  
+  .toggle-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    transition: transform 0.2s;
+  }
+  
+  .toggle-input:checked ~ .toggle-fill::after {
+    transform: translateX(var(--height));
+  }
