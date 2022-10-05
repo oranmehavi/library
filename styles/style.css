@@ -24,8 +24,8 @@ header {
 
 header>button {
   width: 10em;
-  border-radius: 10px;
-  color: white;
+  border: none;
+  color: black;
   background-color: #67e8f9;
 }
 
@@ -44,11 +44,27 @@ header>button {
 
 .book-card {
   display: flex;
+  border: 5px solid black;
+  border-radius: 10px;
+  padding: .5rem;
+  background: lightgreen;
   flex-direction: column;
   max-width: 300px;
   align-items: center;
   gap: 1.5em;
   font-size: 0.75rem;
+}
+
+.book-card > h1 {
+  color: red;
+}
+
+.book-card > button {
+  background-color: blue;
+  padding: .5rem;
+  text-decoration: none;
+  color: white;
+  border: none;
 }
 
 .toggle {
