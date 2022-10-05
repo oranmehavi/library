@@ -40,8 +40,9 @@ confirmButton.addEventListener('click', () => {
 
 
 function showBooks() {
+    
+    bookContainer.innerHTML = '';
     if (myLibrary.length > 0) {
-        bookContainer.innerHTML = '';
         for(let i = 0; i < myLibrary.length; i++) {
             let b = myLibrary[i];
             let bookCard = document.createElement('div');
@@ -50,7 +51,7 @@ function showBooks() {
             let bookPages = document.createElement('h3');
             let readStatus = document.createElement('h3');
             let readToggle = createToggle(b.isRead);
-
+            let deleteButton = document.createElement('button');
 
             title.innerText = "Book name: " + b.bookName;
             bookAuthor.innerText = "Written by: " + b.author;
@@ -59,11 +60,21 @@ function showBooks() {
             readStatus.setAttribute('id', 'status');
             readToggle.setAttribute('type', 'checkbox');
             readToggle.checked = b.isRead;
+            deleteButton.innerText = "Delete book?";
+            deleteButton.addEventListener('click', (e) => {
+                let result = confirm("Are you sure you want to remove this book?");
+                if (result) {
+                    let index = e.target.parentElement.dataset.index;
+                    let arr = myLibrary.splice(index, 1);
+                    showBooks();
+                }
+            });
             bookCard.appendChild(title);
             bookCard.appendChild(bookAuthor);
             bookCard.appendChild(bookPages);
             bookCard.appendChild(readStatus);
             bookCard.appendChild(readToggle);
+            bookCard.appendChild(deleteButton);
             bookCard.setAttribute('data-index', `${i}`);
             bookCard.classList.add('book-card');
             bookContainer.appendChild(bookCard);
